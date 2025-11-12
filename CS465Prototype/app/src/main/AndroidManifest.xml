@@ -18,7 +18,7 @@
             android:name=".discoverActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".searchActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

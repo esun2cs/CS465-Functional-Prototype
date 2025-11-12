@@ -11,6 +11,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import android.view.View;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
+
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -23,13 +29,40 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            //        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.nav_home) {
+                    // do something
+                    Intent i = new Intent(MainActivity.this, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(i);
+                    return true;
+                } else if (id == R.id.nav_discover) {
+                    launchDiscover(null);
+                    return true;
+                } else if (id == R.id.nav_search) {
+                    launchSearch(null);
+                    return true;
+                } else if (id == R.id.nav_favorites) {
+                    launchFavorites(null);
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 
     public void launchSearch(View v) {
         // launch Search page
 
         // Instantiate a new object of type intent, assigned to variable i
-        Intent i = new Intent(this, SearchActivity.class);
+        Intent i = new Intent(this, searchActivity.class);
         startActivity(i);
 
     }

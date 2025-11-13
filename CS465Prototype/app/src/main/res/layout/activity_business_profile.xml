@@ -1,48 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9F8FF"
-    android:orientation="vertical">
+    tools:context=".BusinessProfileActivity"
+    android:background="#F9F8FF">
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_height = "wrap_content"
+        android:layout_width = "wrap_content"
+        android:textSize = "16sp"
+        android:textColor = "@color/black"
+        android:text = "Back"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="UIUC Businesses" />
+    </LinearLayout>
+
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="16dp">
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 <!--            top bar-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="10dp">
-                
-                <Button
-                    android:id="@+id/back"
-                    android:layout_height = "wrap_content"
-                    android:layout_width = "wrap_content"
-                    android:textSize = "16sp"
-                    android:textColor = "@color/black"
-                    android:text = "< Back"
-                    />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:id="@+id/appName"
-                    android:layout_height = "wrap_content"
-                    android:layout_width = "wrap_content"
-                    android:textSize = "16sp"
-                    android:textColor = "@color/black"
-                    android:text = "UIUC Bussinesses"/>
-            </LinearLayout>
 <!--            bizz name, star-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,13 +76,13 @@
                     android:textSize = "30sp"
                     android:textStyle="bold"
                     android:textColor = "@color/black"
-                    android:text = "EXAMPLE BUSSINESS"/>
+                    android:text = "Nailed It by Lily"/>
                 
                 <ImageButton
                     android:id="@+id/star"
                     android:layout_height = "32dp"
                     android:layout_width = "32dp"
-                    android:src="@android:drawable/btn_star"
+                    android:src="@android:drawable/btn_star_big_off"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
 <!--            Bussiness photo-->
@@ -73,7 +90,7 @@
                 android:id="@+id/bussinesImg"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:src="@drawable/Dummy_Photo"
+                android:src="@drawable/nail_art_dummy"
                 />
             <LinearLayout
                 android:id="@+id/bussinessInfo"
@@ -86,21 +103,12 @@
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:id="@+id/owned_by"
+                    android:id="@+id/category"
                     android:layout_height = "wrap_content"
                     android:layout_width = "wrap_content"
                     android:textSize = "16sp"
                     android:textColor = "@color/black"
-                    android:text = "Owned By: "
-                    android:layout_marginBottom="5dp"/>
-
-                <TextView
-                    android:id="@+id/service_provided"
-                    android:layout_height = "wrap_content"
-                    android:layout_width = "wrap_content"
-                    android:textSize = "16sp"
-                    android:textColor = "@color/black"
-                    android:text = "Service Provided: "
+                    android:text = "Category: Student Nail Art and Manicures"
                     android:layout_marginBottom="5dp"/>
 
                 <TextView
@@ -109,7 +117,25 @@
                     android:layout_width = "wrap_content"
                     android:textSize = "16sp"
                     android:textColor = "@color/black"
-                    android:text = "Location: "
+                    android:text = "Location: 309 E Green St, Urbana, IL"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/ci"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "Contact Info: @nailedit.lily (Instagram) | (217) 555-9412L"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/owned_by"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "Owned By: Lily Chen, Sophomore, Graphic Design major"
                     android:layout_marginBottom="5dp"/>
 
                 <TextView
@@ -118,7 +144,16 @@
                     android:layout_width = "wrap_content"
                     android:textSize = "16sp"
                     android:textColor = "@color/black"
-                    android:text = "Price range: "
+                    android:text = "Price Range: $20–45 (basic polish → full gel set)"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "Description: Offering creative nail designs and custom gel art. Appointments open evenings and weekends. 10% off for UIUC students!"
                     android:layout_marginBottom="5dp"/>
 
                 <TextView
@@ -144,54 +179,16 @@
         </LinearLayout>
     </ScrollView>
 <!--NavBar-->
-    <LinearLayout
-        android:id="@+id/nav"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:orientation="horizontal"
-        android:background="#D3D3D3"
-        android:gravity="center">
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-
-        <Button
-            android:id="@+id/home"
-            android:layout_height = "match_parent"
-            android:layout_width = "0dp"
-            android:textSize = "14sp"
-            android:textColor = "@color/black"
-            android:text = "Home"
-            android:gravity = "center"
-            android:layout_weight = "1"
-            />
-        <Button
-            android:id="@+id/discover"
-            android:layout_height = "match_parent"
-            android:layout_width = "0dp"
-            android:textSize = "14sp"
-            android:textColor = "@color/black"
-            android:text = "Discover"
-            android:gravity = "center"
-            android:layout_weight = "1"
-            />
-        <Button
-            android:id="@+id/search"
-            android:layout_height = "match_parent"
-            android:layout_width = "0dp"
-            android:textSize = "14sp"
-            android:textColor = "@color/black"
-            android:text = "Search"
-            android:gravity = "center"
-            android:layout_weight = "1"
-            />
-        <Button
-            android:id="@+id/favorited"
-            android:layout_height = "match_parent"
-            android:layout_width = "0dp"
-            android:textSize = "14sp"
-            android:textColor = "@color/black"
-            android:text = "Favorited"
-            android:gravity = "center"
-            android:layout_weight = "1"
-            />
-    </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

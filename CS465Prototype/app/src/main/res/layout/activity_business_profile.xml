@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F8FF"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+<!--            top bar-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+                
+                <Button
+                    android:id="@+id/back"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "< Back"
+                    />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/appName"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "UIUC Bussinesses"/>
+            </LinearLayout>
+<!--            bizz name, star-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/bussinessName"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "0dp"
+                    android:layout_weight = "1"
+                    android:textSize = "30sp"
+                    android:textStyle="bold"
+                    android:textColor = "@color/black"
+                    android:text = "EXAMPLE BUSSINESS"/>
+                
+                <ImageButton
+                    android:id="@+id/star"
+                    android:layout_height = "32dp"
+                    android:layout_width = "32dp"
+                    android:src="@android:drawable/btn_star"
+                    android:background="@android:color/transparent"/>
+            </LinearLayout>
+<!--            Bussiness photo-->
+            <ImageView
+                android:id="@+id/bussinesImg"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:src="@drawable/Dummy_Photo"
+                />
+            <LinearLayout
+                android:id="@+id/bussinessInfo"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:background="#D3D3D3"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/owned_by"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "Owned By: "
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/service_provided"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "Service Provided: "
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "Location: "
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/price_range"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "Price range: "
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/contact_info"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "Contact Information: "
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/website_url"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "16sp"
+                    android:textColor = "@color/black"
+                    android:text = "Website URL: "
+                    android:layout_marginBottom="5dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+<!--NavBar-->
+    <LinearLayout
+        android:id="@+id/nav"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:background="#D3D3D3"
+        android:gravity="center">
+
+
+        <Button
+            android:id="@+id/home"
+            android:layout_height = "match_parent"
+            android:layout_width = "0dp"
+            android:textSize = "14sp"
+            android:textColor = "@color/black"
+            android:text = "Home"
+            android:gravity = "center"
+            android:layout_weight = "1"
+            />
+        <Button
+            android:id="@+id/discover"
+            android:layout_height = "match_parent"
+            android:layout_width = "0dp"
+            android:textSize = "14sp"
+            android:textColor = "@color/black"
+            android:text = "Discover"
+            android:gravity = "center"
+            android:layout_weight = "1"
+            />
+        <Button
+            android:id="@+id/search"
+            android:layout_height = "match_parent"
+            android:layout_width = "0dp"
+            android:textSize = "14sp"
+            android:textColor = "@color/black"
+            android:text = "Search"
+            android:gravity = "center"
+            android:layout_weight = "1"
+            />
+        <Button
+            android:id="@+id/favorited"
+            android:layout_height = "match_parent"
+            android:layout_width = "0dp"
+            android:textSize = "14sp"
+            android:textColor = "@color/black"
+            android:text = "Favorited"
+            android:gravity = "center"
+            android:layout_weight = "1"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">CS465Prototype</string>
+
+    <!-- For drop down bar in filter page-->
+    <string-array name="service_options">
+        <item>nails</item>
+        <item>florist</item>
+        <item>jewelry</item>
+        <item>tutoring</item>
+        <item>sewing/hemming</item>
+        <item>crafts</item>
+    </string-array>
+
+</resources>
+
+

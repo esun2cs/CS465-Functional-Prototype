@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class favoritesActivity extends AppCompatActivity {
 
     private static final String PREFS = "favorites_pref_v2";
+    private static final String KEY_FIRST_RUN = "isFirstRunFavorites";
 
     private CardView cardClay, cardBouquet;
     private ImageView starClay, starBouquet;
@@ -35,6 +36,17 @@ public class favoritesActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // On first run of this activity, explicitly set the placeholder items to be favorited.
+        // This overrides any stale, cached data from previous app versions.
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        if (prefs.getBoolean(KEY_FIRST_RUN, true)) {
+            prefs.edit()
+                .putBoolean("clay", true)
+                .putBoolean("bouquet", true)
+                .putBoolean(KEY_FIRST_RUN, false) // Set the flag to false for subsequent runs
+                .apply();
+        }
 
         // Cards
         cardClay = findViewById(R.id.card_clay);
@@ -80,8 +92,7 @@ public class favoritesActivity extends AppCompatActivity {
 
     private void toggleFavorite(String key) {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
-        // Default to true since the placeholders are initially visible
-        boolean current = prefs.getBoolean(key, true);
+        boolean current = prefs.getBoolean(key, false); // Default to false, initial state is handled in onCreate
 
         prefs.edit().putBoolean(key, !current).apply();
         refreshUI();
@@ -90,9 +101,8 @@ public class favoritesActivity extends AppCompatActivity {
     private void refreshUI() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
 
-        // Default to true so they are visible on first run
-        boolean clayFav = prefs.getBoolean("clay", true);
-        boolean bouquetFav = prefs.getBoolean("bouquet", true);
+        boolean clayFav = prefs.getBoolean("clay", false);
+        boolean bouquetFav = prefs.getBoolean("bouquet", false);
 
         // Show only starred cards
         cardClay.setVisibility(clayFav ? View.VISIBLE : View.GONE);

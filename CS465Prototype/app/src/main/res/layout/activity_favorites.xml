@@ -98,7 +98,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Handmade Charms & Art Commissions"
+                            android:text="Handmade Charms and Art Commissions"
                             android:textSize="12sp"
                             android:textStyle="italic" />
 
@@ -141,7 +141,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Bloom&Co"
+                            android:text="Bloom and Co"
                             android:textStyle="bold" />
 
                         <TextView
@@ -153,7 +153,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Floral & Gift Creations"
+                            android:text="Floral and Gift Creations"
                             android:textSize="12sp"
                             android:textStyle="italic" />
 

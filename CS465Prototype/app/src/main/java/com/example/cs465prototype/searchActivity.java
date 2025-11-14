@@ -2,10 +2,13 @@ package com.example.cs465prototype;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
-
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+//import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -23,10 +26,18 @@ import kotlin.collections.ArrayDeque;
 
 public class searchActivity extends AppCompatActivity {
 
-//    private SearchView searchView;
+    //    private SearchView searchView;
 //    private List<Item> itemList;
 //    private ItemAdapter itemAdapter;
 //    private RecyclerView recyclerView;
+//
+    private SearchView searchView;
+    private ListView listView;
+    private ArrayAdapter<String> arrayAdapter;
+
+    //    ListView listView;
+//    ArrayAdapter<String> arrayAdapter;
+    String[] businessNameList = {"Nailed It by Lily", "FadeLab by Marcus", "Charm Studio by Priya", "Dorm Dishes by Andy", "BloomAndCo"};
 
 
     @Override
@@ -40,21 +51,31 @@ public class searchActivity extends AppCompatActivity {
             return insets;
         });
 
-//        searchView = findViewById(R.id.searchView);
-//        searchView.clearFocus();
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
+        searchView = findViewById(R.id.searchView);
+        listView = findViewById(R.id.search_results_list);
+
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, businessNameList);
+        listView.setAdapter(arrayAdapter);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                arrayAdapter.getFilter().filter(s);
+                return true;
+            }
+        });
 //
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                filterList(newText);
-//                return true;
-//            }
-//
-//        });
+        // Click handler for results (optional now)
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            String selected = arrayAdapter.getItem(position);
+            // TODO: Pass selected business to profile page of CORRECT BUSINESS, this businessactivity is still hardcoded
+            launchBusinessProfile(null);
+        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
@@ -83,6 +104,11 @@ public class searchActivity extends AppCompatActivity {
         });
     }
 
+    public void launchFilter(View v) {
+        Intent i = new Intent(this, filterActivity.class);
+        startActivity(i);
+    }
+
     public void launchSearch(View v) {
         // launch Search page
 
@@ -107,15 +133,7 @@ public class searchActivity extends AppCompatActivity {
         // Instantiate a new object of type intent, assigned to variable i
         Intent i = new Intent(this, favoritesActivity.class);
         startActivity(i);
-
     }
-
-//    private void filterList(String newText) {
-//        List<Item> filteredList = new ArrayList<>();
-//        for (Item item : itemList){
-//            if (item.getItemName())
-//        }
-//    }
     public void launchBusinessProfile(View v) {
         // launch business page
         Intent i = new Intent(this, BusinessProfileActivity.class);

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "01",
+    "name": "Nailed It by Lily",
+    "category": "Student Nail Art",
+    "location": "309 E Green St, Urbana, IL",
+    "contact": "@nailedit.lily | (217) 555-9412",
+    "owner": "Lily Chen, Sophomore, Graphic Design",
+    "price_range": "$20–45",
+    "description": "Offering creative nail designs and custom gel art.",
+    "photo": "lily_nails.jpg",
+    "tags": ["nails", "nailart", "art", "cosmetics"],
+    "favorited": "false",
+    "new": "false"
+  },
+  {
+    "id": "02",
+    "name": "FadeLab by Marcus",
+    "category": "Student Haircuts & Styling",
+    "location": "401 E Springfield Ave, Champaign, IL",
+    "contact": "@fadelab_uiuc | (217) 555-7281",
+    "owner": "Marcus Johnson, Junior, Civil Engineering",
+    "price_range": "$15–25",
+    "description": "Mobile haircut service specializing in men’s fades, shape-ups, and beard trims. Marcus brings the barber tools straight to dorms and apartments!",
+    "photo": "fadelab_marcus.jpg",
+    "tags": ["haircut", "barber", "grooming", "menscare"],
+    "favorited": "false",
+    "new": "false"
+  },
+  {
+    "id": "03",
+    "name": "Charm Studio by Priya",
+    "category": "Handmade Charms & Art Commissions",
+    "location": "Online / Campus Pickup",
+    "contact": "@charmstudio.pri | priya.art@illinois.edu",
+    "owner": "Priya Patel, Senior, Studio Art",
+    "price_range": "$8–40 per item",
+    "description": "Cute polymer clay charms, stickers, and personalized art commissions. All pieces are handmade — DM to customize colors or names.",
+    "photo": "charmstudio_priya.jpg",
+    "tags": ["charms", "art", "commissions", "handmade"],
+    "favorited": "false",
+    "new": "true"
+  },
+  {
+    "id": "04",
+    "name": "Dorm Dishes by Andy",
+    "category": "Homemade Asian Fusion Meals",
+    "location": "ISR Dining Area (pickup)",
+    "contact": "(217) 555-4302 | @dormdishesbyandy",
+    "owner": "Andy Nguyen, Sophomore, Food Science",
+    "price_range": "$7–12",
+    "description": "Home-style rice bowls, dumplings, and noodles cooked fresh daily. Limited quantities — preorder by noon for dinner pickup.",
+    "photo": "dormdishes_andy.jpg",
+    "tags": ["food", "homemade", "asianfusion", "meals"],
+    "favorited": "false",
+    "new": "true"
+  },
+  {
+    "id": "05",
+    "name": "Bloom&Co",
+    "category": "Student Floral & Gift Creations",
+    "location": "5th & Green, Urbana, IL",
+    "contact": "@bloomandco.uiuc | bloomandco@gmail.com",
+    "owner": "Sarah Kim, Junior, Horticulture",
+    "price_range": "$15–60",
+    "description": "Custom mini bouquets and gift baskets for birthdays and campus events. Eco-friendly wrapping and same-day delivery available.",
+    "photo": "bloomandco_sarah.jpg",
+    "tags": ["flowers", "gifts", "bouquets", "handcrafted"],
+    "favorited": "false",
+    "new": "true"
+  }
+]

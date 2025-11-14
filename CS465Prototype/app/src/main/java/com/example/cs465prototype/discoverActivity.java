@@ -80,4 +80,10 @@ public class discoverActivity extends AppCompatActivity {
         startActivity(i);
 
     }
+
+    public void launchBusinessProfile(View v) {
+        // launch business page
+        Intent i = new Intent(this, BusinessProfileActivity.class);
+        startActivity(i);
+    }
 }

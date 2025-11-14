@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        BusinessDataManager.getInstance().loadFromJson(this);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             //        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

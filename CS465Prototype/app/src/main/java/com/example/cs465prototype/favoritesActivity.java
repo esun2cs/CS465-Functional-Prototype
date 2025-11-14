@@ -1,16 +1,17 @@
 package com.example.cs465prototype;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -18,12 +19,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class favoritesActivity extends AppCompatActivity {
-
-    private static final String PREFS = "favorites_pref_v2";
-    private static final String KEY_FIRST_RUN = "isFirstRunFavorites";
-
-    private CardView cardClay, cardBouquet;
-    private ImageView starClay, starBouquet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,36 +32,38 @@ public class favoritesActivity extends AppCompatActivity {
             return insets;
         });
 
-        // On first run of this activity, explicitly set the placeholder items to be favorited.
-        // This overrides any stale, cached data from previous app versions.
-        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
-        if (prefs.getBoolean(KEY_FIRST_RUN, true)) {
-            prefs.edit()
-                .putBoolean("clay", true)
-                .putBoolean("bouquet", true)
-                .putBoolean(KEY_FIRST_RUN, false) // Set the flag to false for subsequent runs
-                .apply();
-        }
+        loadFavorites();
 
-        // Cards
-        cardClay = findViewById(R.id.card_clay);
-        cardBouquet = findViewById(R.id.card_bouquet);
+//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+//        bottomNavigationView.setSelectedItemId(R.id.nav_favorites);
+//        bottomNavigationView.setOnItemSelectedListener(this::handleNavigation);
+        // Bottom navigation
+        BottomNavigationView nav = findViewById(R.id.bottom_navigation);
+        nav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
 
-        // Stars
-        starClay = findViewById(R.id.star_clay);
-        starBouquet = findViewById(R.id.star_bouquet);
+            if (id == R.id.nav_home) {
+                startActivity(new Intent(favoritesActivity.this, MainActivity.class));
+                return true;
+            } else if (id == R.id.nav_discover) {
+                startActivity(new Intent(favoritesActivity.this, discoverActivity.class));
+                return true;
+            } else if (id == R.id.nav_search) {
+                startActivity(new Intent(favoritesActivity.this, searchActivity.class));
+                return true;
+            } else if (id == R.id.nav_favorites) {
+                startActivity(new Intent(favoritesActivity.this, favoritesActivity.class));
+                return true;
+            }
 
-        // Load UI state
-        refreshUI();
+            return false;
+        });
+    }
 
-        // Star click listeners
-        starClay.setOnClickListener(v -> toggleFavorite("clay"));
-        starBouquet.setOnClickListener(v -> toggleFavorite("bouquet"));
-
-        // Bottom nav
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_favorites);
-        bottomNavigationView.setOnItemSelectedListener(this::handleNavigation);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadFavorites();  // refresh every time you return
     }
 
     private boolean handleNavigation(@NonNull MenuItem item) {
@@ -88,45 +85,52 @@ public class favoritesActivity extends AppCompatActivity {
         return false;
     }
 
-    // --- FAVORITE MANAGEMENT ---
+    private void loadFavorites() {
+        LinearLayout container = findViewById(R.id.favorites_container);
+        container.removeAllViews();
 
-    private void toggleFavorite(String key) {
-        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
-        boolean current = prefs.getBoolean(key, false); // Default to false, initial state is handled in onCreate
+        BusinessDataManager dm = BusinessDataManager.getInstance();
+        LayoutInflater inflater = LayoutInflater.from(this);
 
-        prefs.edit().putBoolean(key, !current).apply();
-        refreshUI();
-    }
+        for (Business b : dm.allBusinesses) {
+            if (!b.favorited) continue;
 
-    private void refreshUI() {
-        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+            View card = inflater.inflate(R.layout.business_card, container, false);
 
-        boolean clayFav = prefs.getBoolean("clay", false);
-        boolean bouquetFav = prefs.getBoolean("bouquet", false);
+            ((TextView) card.findViewById(R.id.business_name)).setText(b.name);
+            ((TextView) card.findViewById(R.id.business_added)).setText("Favorited");
+            ((TextView) card.findViewById(R.id.business_category)).setText(b.category);
+            ((TextView) card.findViewById(R.id.business_description)).setText(b.description);
 
-        // Show only starred cards
-        cardClay.setVisibility(clayFav ? View.VISIBLE : View.GONE);
-        cardBouquet.setVisibility(bouquetFav ? View.VISIBLE : View.GONE);
+//            ImageView img = card.findViewById(R.id.business_photo);
+//            int imgRes = getResources().getIdentifier(
+//                    b.photo.replace(".jpg",""), "drawable", getPackageName());
+//            if (imgRes != 0) img.setImageResource(imgRes);
 
-        // Update star icons
-        updateStar(starClay, clayFav);
-        updateStar(starBouquet, bouquetFav);
-    }
+            ImageView img = card.findViewById(R.id.business_photo);
 
-    private void updateStar(ImageView star, boolean isFav) {
-        if (isFav) {
-            star.setImageResource(R.drawable.ic_star);  // filled
-        } else {
-            star.setImageResource(R.drawable.ic_star_border);  // empty
+            String imgName = b.photo
+                    .toLowerCase()
+                    .replace(".jpg", "")
+                    .replace(".jpeg", "")
+                    .replace(".png", "")
+                    .replace("-", "_")
+                    .replace(" ", "_");
+
+            int imgRes = getResources().getIdentifier(imgName, "drawable", getPackageName());
+
+            if (imgRes != 0) {
+                img.setImageResource(imgRes);
+            }
+
+
+            card.setOnClickListener(v -> {
+                Intent i = new Intent(this, BusinessProfileActivity.class);
+                i.putExtra("business_id", b.id);
+                startActivity(i);
+            });
+
+            container.addView(card);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        refreshUI();
-        // Make sure the correct nav item is selected
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_favorites);
     }
 }

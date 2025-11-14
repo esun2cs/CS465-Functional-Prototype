@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -204,10 +205,27 @@ public class BusinessProfileActivity extends AppCompatActivity {
         // Set initial star icon
         updateStarIcon(starBtn, currentBusiness.favorited);
 
-        // Toggle favorite on click
+        // Toggle favorite on click and also includes popup error correction alert if you want to unadded it from favorites or when you add it
         starBtn.setOnClickListener(v -> {
-            currentBusiness.favorited = !currentBusiness.favorited;
-            updateStarIcon(starBtn, currentBusiness.favorited);
+            if (currentBusiness.favorited) {
+                new AlertDialog.Builder(BusinessProfileActivity.this)
+                        .setMessage("Are you sure you want to remove this business from your Favorites?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            currentBusiness.favorited = false;
+                            updateStarIcon(starBtn, false);
+                            Toast.makeText(BusinessProfileActivity.this, "Removed from Favorites", Toast.LENGTH_SHORT).show();
+
+                        })
+                        .setNegativeButton("Cancel", (dialog, which) -> {
+                           dialog.dismiss();
+
+                        }).show();
+            } else {
+                currentBusiness.favorited = true;
+                updateStarIcon(starBtn, true);
+                Toast.makeText(BusinessProfileActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();
+            }
+
         });
 
         // Back button

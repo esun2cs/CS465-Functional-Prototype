@@ -26,97 +26,73 @@ public class filterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-
         setContentView(R.layout.activity_filter);
 
-        // Handle window insets for edge-to-edge layout
+        // Handle edge-to-edge insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
             return insets;
         });
 
         // Spinner setup
         Spinner spinner = findViewById(R.id.spinner_service);
         String[] services = {"nails", "florist", "jewelry", "tutoring", "sewing/hemming", "crafts"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, services);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, services);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        // X button navigates to SearchActivity
+        // Close button → go back to searchActivity
         ImageButton closeButton = findViewById(R.id.btn_close_popup);
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(filterActivity.this, searchActivity.class);
-                startActivity(intent);
-                finish(); // close filterActivity
-            }
+        closeButton.setOnClickListener(v -> {
+            startActivity(new Intent(filterActivity.this, searchActivity.class));
+            finish();
         });
 
         // Clear button resets all filters
         Button clearButton = findViewById(R.id.btn_clear_filters);
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Reset Spinner
-                spinner.setSelection(0);
+        clearButton.setOnClickListener(v -> {
+            spinner.setSelection(0);
 
-                // Reset CheckBoxes
-                CheckBox onCampus = findViewById(R.id.checkbox_on_campus);
-                CheckBox offCampus = findViewById(R.id.checkbox_off_campus);
-                onCampus.setChecked(false);
-                offCampus.setChecked(false);
+            CheckBox onCampus = findViewById(R.id.checkbox_on_campus);
+            CheckBox offCampus = findViewById(R.id.checkbox_off_campus);
 
-                // Reset SeekBar
-                SeekBar seekBar = findViewById(R.id.seekbar_price);
-                seekBar.setProgress(0);
-            }
+            onCampus.setChecked(false);
+            offCampus.setChecked(false);
+
+            SeekBar seek = findViewById(R.id.seekbar_price);
+            seek.setProgress(0);
         });
 
-        // Bottom navigation setup
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.nav_home) {
-                    Intent i = new Intent(filterActivity.this, MainActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(i);
-                    return true;
-                } else if (id == R.id.nav_discover) {
-                    launchDiscover(null);
-                    return true;
-                } else if (id == R.id.nav_search) {
-                    launchSearch(null);
-                    return true;
-                } else if (id == R.id.nav_favorites) {
-                    launchFavorites(null);
-                    return true;
-                }
-                return false;
-            }
+        // Apply Filters button → go to Search screen
+        Button applyButton = findViewById(R.id.btn_apply_filters);
+        applyButton.setOnClickListener(v -> {
+            Intent intent = new Intent(filterActivity.this, searchActivity.class);
+            startActivity(intent);
+            finish();
         });
-    }
 
-    public void launchSearch(View v) {
-        Intent i = new Intent(this, searchActivity.class);
-        startActivity(i);
-    }
+        // Bottom navigation listeners
+        BottomNavigationView nav = findViewById(R.id.bottom_navigation);
+        nav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
 
-    public void launchDiscover(View v) {
-        Intent i = new Intent(this, discoverActivity.class);
-        startActivity(i);
-    }
+            if (id == R.id.nav_home) {
+                startActivity(new Intent(filterActivity.this, MainActivity.class));
+                return true;
+            } else if (id == R.id.nav_discover) {
+                startActivity(new Intent(filterActivity.this, discoverActivity.class));
+                return true;
+            } else if (id == R.id.nav_search) {
+                startActivity(new Intent(filterActivity.this, searchActivity.class));
+                return true;
+            } else if (id == R.id.nav_favorites) {
+                startActivity(new Intent(filterActivity.this, favoritesActivity.class));
+                return true;
+            }
 
-    public void launchFavorites(View v) {
-        Intent i = new Intent(this, favoritesActivity.class);
-        startActivity(i);
-    }
-
-    public void launchFilter(View v) {
-        Intent i = new Intent(this, filterActivity.class);
-        startActivity(i);
+            return false;
+        });
     }
 }

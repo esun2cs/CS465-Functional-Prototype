@@ -2,8 +2,6 @@ package com.example.cs465prototype;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,7 +10,6 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -28,18 +25,24 @@ public class filterActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_filter);
 
-        // Handle edge-to-edge insets
+        // Edge-to-edge padding
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
             return insets;
         });
 
-        // Spinner setup
+        // ============================
+        // SPINNER SETUP (FIXED)
+        // ============================
         Spinner spinner = findViewById(R.id.spinner_service);
-        String[] services = {"nails", "florist", "jewelry", "tutoring", "sewing/hemming", "crafts"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, services);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.service_options,                  // ← Now using strings.xml
+                android.R.layout.simple_spinner_item
+        );
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -57,15 +60,14 @@ public class filterActivity extends AppCompatActivity {
 
             CheckBox onCampus = findViewById(R.id.checkbox_on_campus);
             CheckBox offCampus = findViewById(R.id.checkbox_off_campus);
+            SeekBar seek = findViewById(R.id.seekbar_price);
 
             onCampus.setChecked(false);
             offCampus.setChecked(false);
-
-            SeekBar seek = findViewById(R.id.seekbar_price);
             seek.setProgress(0);
         });
 
-        // Apply Filters button → go to Search screen
+        // Apply Filters → go to Search page
         Button applyButton = findViewById(R.id.btn_apply_filters);
         applyButton.setOnClickListener(v -> {
             Intent intent = new Intent(filterActivity.this, searchActivity.class);
@@ -73,7 +75,7 @@ public class filterActivity extends AppCompatActivity {
             finish();
         });
 
-        // Bottom navigation listeners
+        // Bottom navigation
         BottomNavigationView nav = findViewById(R.id.bottom_navigation);
         nav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();

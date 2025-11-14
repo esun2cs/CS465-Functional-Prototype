@@ -54,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
+                android:onClick="launchBusinessProfile"
                 app:cardElevation="3dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -100,6 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
+                android:onClick="launchBusinessProfile"
                 app:cardElevation="3dp">
                 <LinearLayout
                     android:layout_width="match_parent"

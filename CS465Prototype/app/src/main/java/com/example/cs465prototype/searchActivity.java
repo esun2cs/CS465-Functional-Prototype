@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -11,10 +13,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
+import kotlin.collections.ArrayDeque;
+
 public class searchActivity extends AppCompatActivity {
+
+//    private SearchView searchView;
+//    private List<Item> itemList;
+//    private ItemAdapter itemAdapter;
+//    private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +39,22 @@ public class searchActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+//        searchView = findViewById(R.id.searchView);
+//        searchView.clearFocus();
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                filterList(newText);
+//                return true;
+//            }
+//
+//        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
@@ -79,5 +108,17 @@ public class searchActivity extends AppCompatActivity {
         Intent i = new Intent(this, favoritesActivity.class);
         startActivity(i);
 
+    }
+
+//    private void filterList(String newText) {
+//        List<Item> filteredList = new ArrayList<>();
+//        for (Item item : itemList){
+//            if (item.getItemName())
+//        }
+//    }
+    public void launchBusinessProfile(View v) {
+        // launch business page
+        Intent i = new Intent(this, BusinessProfileActivity.class);
+        startActivity(i);
     }
 }

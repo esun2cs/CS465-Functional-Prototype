@@ -2,28 +2,25 @@ package com.example.cs465prototype;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import android.view.View;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import android.view.MenuItem;
-import androidx.annotation.NonNull;
-
-
-public class MainActivity extends AppCompatActivity {
+public class filterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_favorites);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -38,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
                     // do something
-                    Intent i = new Intent(MainActivity.this, MainActivity.class);
+                    Intent i = new Intent(filterActivity.this, MainActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(i);
                     return true;
@@ -55,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     public void launchSearch(View v) {
@@ -89,12 +85,6 @@ public class MainActivity extends AppCompatActivity {
         // launch Filter page
 
         Intent i = new Intent(this, filterActivity.class);
-        startActivity(i);
-    }
-
-    public void launchBusinessProfile(View v) {
-        // launch business page
-        Intent i = new Intent(this, BusinessProfileActivity.class);
         startActivity(i);
     }
 }

@@ -15,6 +15,9 @@
             android:name=".BusinessProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".filterActivity"
+            android:exported="false" />
+        <activity
             android:name=".favoritesActivity"
             android:exported="false" />
         <activity

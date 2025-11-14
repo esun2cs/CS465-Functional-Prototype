@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+<<<<<<< HEAD
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+=======
+>>>>>>> origin/main
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -26,16 +29,21 @@ public class filterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+<<<<<<< HEAD
 
         setContentView(R.layout.activity_filter);
 
         // Handle window insets for edge-to-edge layout
+=======
+        setContentView(R.layout.activity_favorites);
+>>>>>>> origin/main
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+<<<<<<< HEAD
         // Spinner setup
         Spinner spinner = findViewById(R.id.spinner_service);
         String[] services = {"nails", "florist", "jewelry", "tutoring", "sewing/hemming", "crafts"};
@@ -77,10 +85,19 @@ public class filterActivity extends AppCompatActivity {
         // Bottom navigation setup
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+=======
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            //        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+>>>>>>> origin/main
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
+<<<<<<< HEAD
+=======
+                    // do something
+>>>>>>> origin/main
                     Intent i = new Intent(filterActivity.this, MainActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(i);
@@ -101,6 +118,7 @@ public class filterActivity extends AppCompatActivity {
     }
 
     public void launchSearch(View v) {
+<<<<<<< HEAD
         Intent i = new Intent(this, searchActivity.class);
         startActivity(i);
     }
@@ -120,3 +138,38 @@ public class filterActivity extends AppCompatActivity {
         startActivity(i);
     }
 }
+=======
+        // launch Search page
+
+        // Instantiate a new object of type intent, assigned to variable i
+        Intent i = new Intent(this, searchActivity.class);
+        startActivity(i);
+
+    }
+
+    public void launchDiscover(View v) {
+        // launch Search page
+
+        // Instantiate a new object of type intent, assigned to variable i
+        Intent i = new Intent(this, discoverActivity.class);
+        startActivity(i);
+
+    }
+
+    public void launchFavorites(View v) {
+        // launch Search page
+
+        // Instantiate a new object of type intent, assigned to variable i
+        Intent i = new Intent(this, favoritesActivity.class);
+        startActivity(i);
+
+    }
+
+    public void launchFilter(View v) {
+        // launch Filter page
+
+        Intent i = new Intent(this, filterActivity.class);
+        startActivity(i);
+    }
+}
+>>>>>>> origin/main

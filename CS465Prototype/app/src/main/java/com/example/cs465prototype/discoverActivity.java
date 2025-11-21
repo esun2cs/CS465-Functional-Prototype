@@ -89,7 +89,7 @@ public class discoverActivity extends AppCompatActivity {
                     startActivity(i);
                 });
                 
-                // --- Star Icon Logic (Minimal Change) ---
+                // Star Icon Logic
                 ImageView star = card.findViewById(R.id.business_favorite_star);
                 // Set initial star state
                 if (b.favorited) {
@@ -115,10 +115,12 @@ public class discoverActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            //        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
+                    // do something
                     Intent i = new Intent(discoverActivity.this, MainActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(i);
@@ -139,21 +141,31 @@ public class discoverActivity extends AppCompatActivity {
     }
 
     public void launchSearch(View v) {
+        // launch Search page
+
+        // Instantiate a new object of type intent, assigned to variable i
         Intent i = new Intent(this, searchActivity.class);
         startActivity(i);
     }
 
     public void launchDiscover(View v) {
+        // launch Search page
+
+        // Instantiate a new object of type intent, assigned to variable i
         Intent i = new Intent(this, discoverActivity.class);
         startActivity(i);
     }
 
     public void launchFavorites(View v) {
+        // launch Search page
+
+        // Instantiate a new object of type intent, assigned to variable i
         Intent i = new Intent(this, favoritesActivity.class);
         startActivity(i);
     }
 
     public void launchBusinessProfile(View v) {
+        // launch business page
         Intent i = new Intent(this, BusinessProfileActivity.class);
         startActivity(i);
     }

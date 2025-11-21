@@ -12,13 +12,13 @@
         android:id="@+id/header_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:paddingTop="24dp"
         android:paddingBottom="12dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,17 +26,18 @@
             android:text="Your Saved Services"
             android:textSize="22sp"
             android:textStyle="bold" />
-
     </LinearLayout>
 
+    <!-- Scroll Content for Favorites -->
     <ScrollView
+        android:id="@+id/favorites_scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/header_layout"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/header_layout">
 
         <LinearLayout
             android:id="@+id/favorites_container"
@@ -44,137 +45,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp" />
-
     </ScrollView>
 
-
-    <!-- Scroll Content -->
-<!--    <ScrollView-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:fillViewport="true"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/header_layout"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:padding="16dp">-->
-
-<!--            &lt;!&ndash; Clay Card &ndash;&gt;-->
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/card_clay"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="12dp"-->
-<!--                app:cardElevation="3dp">-->
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:padding="12dp"-->
-<!--                    android:gravity="center_vertical">-->
-
-<!--                    &lt;!&ndash; Text Column &ndash;&gt;-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:paddingEnd="8dp">-->
-
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Charm Studio By Priya"-->
-<!--                            android:textStyle="bold" />-->
-
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Handmade Charms &amp; Art" />-->
-
-<!--                    </LinearLayout>-->
-
-<!--                    &lt;!&ndash; Image &ndash;&gt;-->
-<!--                    <ImageView-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="80dp"-->
-<!--                        android:background="@drawable/clay_dummy_image" />-->
-
-<!--                    &lt;!&ndash; Star &ndash;&gt;-->
-<!--                    <ImageView-->
-<!--                        android:id="@+id/star_clay"-->
-<!--                        android:layout_width="32dp"-->
-<!--                        android:layout_height="32dp"-->
-<!--                        android:layout_marginLeft="8dp"-->
-<!--                        android:src="@drawable/ic_star_border"-->
-<!--                        android:tint="#FFA500" />-->
-
-<!--                </LinearLayout>-->
-<!--            </androidx.cardview.widget.CardView>-->
-
-
-<!--            &lt;!&ndash; Bouquet Card &ndash;&gt;-->
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/card_bouquet"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="12dp"-->
-<!--                app:cardElevation="3dp">-->
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:padding="12dp"-->
-<!--                    android:gravity="center_vertical">-->
-
-<!--                    &lt;!&ndash; Text &ndash;&gt;-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:paddingEnd="8dp">-->
-
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Bloom &amp; Co"-->
-<!--                            android:textStyle="bold" />-->
-
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Floral &amp; Gift Creations" />-->
-
-<!--                    </LinearLayout>-->
-
-<!--                    &lt;!&ndash; Image &ndash;&gt;-->
-<!--                    <ImageView-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="80dp"-->
-<!--                        android:background="@drawable/bouquet_dummy_image" />-->
-
-<!--                    &lt;!&ndash; Star &ndash;&gt;-->
-<!--                    <ImageView-->
-<!--                        android:id="@+id/star_bouquet"-->
-<!--                        android:layout_width="32dp"-->
-<!--                        android:layout_height="32dp"-->
-<!--                        android:layout_marginLeft="8dp"-->
-<!--                        android:src="@drawable/ic_star_border"-->
-<!--                        android:tint="#FFA500" />-->
-
-<!--                </LinearLayout>-->
-<!--            </androidx.cardview.widget.CardView>-->
-
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
+    <!-- Empty State View -->
+    <TextView
+        android:id="@+id/empty_state_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No favorites saved yet"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_layout" />
 
     <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -182,10 +66,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -88,6 +88,25 @@ public class discoverActivity extends AppCompatActivity {
                     i.putExtra("business_id", b.id);
                     startActivity(i);
                 });
+                
+                // Star Icon Logic
+                ImageView star = card.findViewById(R.id.business_favorite_star);
+                // Set initial star state
+                if (b.favorited) {
+                    star.setImageResource(android.R.drawable.btn_star_big_on);
+                } else {
+                    star.setImageResource(android.R.drawable.btn_star_big_off);
+                }
+                // Add click listener to the star to toggle the favorite state
+                star.setOnClickListener(v -> {
+                    b.favorited = !b.favorited; // Toggle state
+                    // Update icon immediately
+                    if (b.favorited) {
+                        star.setImageResource(android.R.drawable.btn_star_big_on);
+                    } else {
+                        star.setImageResource(android.R.drawable.btn_star_big_off);
+                    }
+                });
 
                 // Add card to container
                 cardContainer.addView(card);
@@ -127,7 +146,6 @@ public class discoverActivity extends AppCompatActivity {
         // Instantiate a new object of type intent, assigned to variable i
         Intent i = new Intent(this, searchActivity.class);
         startActivity(i);
-
     }
 
     public void launchDiscover(View v) {
@@ -136,7 +154,6 @@ public class discoverActivity extends AppCompatActivity {
         // Instantiate a new object of type intent, assigned to variable i
         Intent i = new Intent(this, discoverActivity.class);
         startActivity(i);
-
     }
 
     public void launchFavorites(View v) {
@@ -145,7 +162,6 @@ public class discoverActivity extends AppCompatActivity {
         // Instantiate a new object of type intent, assigned to variable i
         Intent i = new Intent(this, favoritesActivity.class);
         startActivity(i);
-
     }
 
     public void launchBusinessProfile(View v) {

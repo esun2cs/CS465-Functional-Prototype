@@ -34,7 +34,7 @@ public class discoverActivity extends AppCompatActivity {
         LinearLayout cardContainer = findViewById(R.id.card_container);
         BusinessDataManager dm = BusinessDataManager.getInstance();
         // Ensure data is loaded
-        if (dm.allBusinesses.size() == 0) {
+        if (dm.allBusinesses.isEmpty()) {
             dm.loadFromJson(this);
         }
 

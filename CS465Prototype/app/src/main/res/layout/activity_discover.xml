@@ -34,7 +34,7 @@
             android:textColor="#FF0000"/>
     </LinearLayout>
 
-    <!--business card list-->
+    <!--BUSINESS CARDS LIST-->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -50,112 +50,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp"/>
-
-        <!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:padding="16dp">-->
-
-<!--            &lt;!&ndash;card 1&ndash;&gt;-->
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="12dp"-->
-<!--                android:onClick="launchBusinessProfile"-->
-<!--                app:cardElevation="3dp">-->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:padding="12dp"-->
-<!--                    android:gravity="center_vertical">-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:paddingEnd="8dp">-->
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Charm Studio By Priya"-->
-<!--                            android:textStyle="bold"/>-->
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Added 5 days ago"-->
-<!--                            android:textSize="10sp"/>-->
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Handmade Charms &amp; Art Commissions"-->
-<!--                            android:textSize="12sp"-->
-<!--                            android:textStyle="italic"/>-->
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Cute polymer clay charms, stickers, and personalized art commissions. All pieces are handmade — DM to customize colors or names."/>-->
-<!--                    </LinearLayout>-->
-<!--                    <ImageView-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="80dp"-->
-<!--                        android:background="@drawable/clay_dummy_image"/>-->
-<!--                </LinearLayout>-->
-<!--            </androidx.cardview.widget.CardView>-->
-
-<!--            &lt;!&ndash;card 2&ndash;&gt;-->
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="12dp"-->
-<!--                android:onClick="launchBusinessProfile"-->
-<!--                app:cardElevation="3dp">-->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:padding="12dp"-->
-<!--                    android:gravity="center_vertical">-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:paddingEnd="8dp">-->
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Bloom&amp;Co"-->
-<!--                            android:textStyle="bold"/>-->
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Added 12 days ago"-->
-<!--                            android:textSize="10sp"/>-->
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Student Floral &amp; Gift Creations"-->
-<!--                            android:textSize="12sp"-->
-<!--                            android:textStyle="italic"/>-->
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Custom mini bouquets and gift baskets for birthdays and campus events. Eco-friendly wrapping and same-day delivery available."/>-->
-<!--                    </LinearLayout>-->
-<!--                    <ImageView-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="80dp"-->
-<!--                        android:background="@drawable/bouquet_dummy_image"/>-->
-<!--                </LinearLayout>-->
-<!--            </androidx.cardview.widget.CardView>-->
-<!--        </LinearLayout>-->
     </ScrollView>
 
-
-
-    <!--nav bar-->
+    <!--NAVIGATION BAR-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"

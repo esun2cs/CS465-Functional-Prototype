@@ -2,6 +2,12 @@ package com.example.cs465prototype;
 
 import android.os.Bundle;
 
+import androidx.core.view.WindowCompat;
+import androidx.viewpager2.widget.ViewPager2;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
@@ -12,10 +18,14 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
 
 
 //public class BusinessProfileActivity extends AppCompatActivity {
@@ -141,6 +151,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_business_profile);
@@ -148,7 +159,8 @@ public class BusinessProfileActivity extends AppCompatActivity {
         // Get views
         Button backBtn = findViewById(R.id.back);
         ImageButton starBtn = findViewById(R.id.star);
-        ImageView mainImg = findViewById(R.id.bussinesImg);
+//        ImageView mainImg = findViewById(R.id.bussinesImg);
+        ViewPager2 imagesP = findViewById(R.id.images);
 
         TextView name = findViewById(R.id.bussinessName);
         TextView category = findViewById(R.id.category);
@@ -170,12 +182,12 @@ public class BusinessProfileActivity extends AppCompatActivity {
 
         // Populate UI
         name.setText(currentBusiness.name);
-        category.setText("Category: " + currentBusiness.category);
-        location.setText("Location: " + currentBusiness.location);
-        ci.setText("Contact: " + currentBusiness.contact);
-        owned.setText("Owned By: " + currentBusiness.owner);
-        price.setText("Price Range: " + currentBusiness.price_range);
-        desc.setText("Description: " + currentBusiness.description);
+        category.setText(currentBusiness.category);
+        location.setText(currentBusiness.location);
+        ci.setText(currentBusiness.contact);
+        owned.setText(currentBusiness.owner);
+        price.setText(currentBusiness.price_range);
+        desc.setText(currentBusiness.description);
 
 //        // Load image
 //        int imgRes = getResources().getIdentifier(
@@ -197,8 +209,43 @@ public class BusinessProfileActivity extends AppCompatActivity {
 
         int imgRes = getResources().getIdentifier(imgName, "drawable", getPackageName());
 
+
+        List<Integer> images = new ArrayList<>();
         if (imgRes != 0) {
-            mainImg.setImageResource(imgRes);
+            images.add(imgRes);
+            images.add(imgRes);
+            images.add(imgRes);
+        }
+        BusinessImagePagerAdapter pagerAdapter = new BusinessImagePagerAdapter(images);
+        imagesP.setAdapter(pagerAdapter);
+
+        //dots under pictures
+        TabLayout dots = findViewById(R.id.image_dots);
+        new TabLayoutMediator(dots, imagesP, (tab, position) -> {}).attach();
+        //dots size
+        for (int i = 0; i < dots.getTabCount(); i++) {
+            TabLayout.Tab tab = dots.getTabAt(i);
+            if (tab != null) {
+                tab.setCustomView(R.layout.size_dots);
+            }
+        }
+        //change dot colors
+        dots.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.getCustomView().setBackgroundResource(R.drawable.dot_selected);
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                tab.getCustomView().setBackgroundResource(R.drawable.dot_unselected);
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
+        //initial colo of dots
+        TabLayout.Tab firstTab = dots.getTabAt(0);
+        if (firstTab != null && firstTab.getCustomView() != null) {
+            firstTab.getCustomView().setBackgroundResource(R.drawable.dot_selected);
         }
 
 

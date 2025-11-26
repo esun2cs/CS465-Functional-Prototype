@@ -3,22 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BusinessProfileActivity"
-    android:background="#F9F8FF">
+    android:background="@android:color/white">
 
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
+        android:background="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -28,8 +30,13 @@
         android:layout_height = "wrap_content"
         android:layout_width = "wrap_content"
         android:textSize = "16sp"
-        android:textColor = "@color/black"
-        android:text = "Back"/>
+        android:textColor = "@color/white"
+        android:text = "Back"
+        android:background="@drawable/back_button"
+        app:backgroundTint="@null"
+        android:padding="0dp"
+       />
+
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -39,7 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@color/black"
+        android:textColor="#2F4858"
+        android:textStyle="bold"
         android:text="UIUC Businesses" />
     </LinearLayout>
 
@@ -49,6 +57,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="16dp"
+        android:background="#F7F3FA"
         app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
@@ -73,11 +82,11 @@
                     android:layout_height = "wrap_content"
                     android:layout_width = "0dp"
                     android:layout_weight = "1"
-                    android:textSize = "30sp"
+                    android:textSize = "20sp"
                     android:textStyle="bold"
-                    android:textColor = "@color/black"
-                    android:text = "Nailed It by Lily"/>
-                
+                    android:textColor = "#2F4858"
+                    android:text = "NAILED IT BY LILY"/>
+
                 <ImageButton
                     android:id="@+id/star"
                     android:layout_height = "32dp"
@@ -86,97 +95,270 @@
                     android:background="@android:color/transparent"/>
             </LinearLayout>
 <!--            Bussiness photo-->
-            <ImageView
-                android:id="@+id/bussinesImg"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/imageCard"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:src="@drawable/nail_art_dummy"
-                />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardUseCompatPadding="true"
+                app:cardPreventCornerOverlap="true"
+                android:clipToOutline="true">
+
             <LinearLayout
-                android:id="@+id/bussinessInfo"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:layout_marginBottom="10dp"
-                android:padding="15dp"
-                android:background="#D3D3D3"
-                android:layout_marginTop="15dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/images"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:overScrollMode="never" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/image_dots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_gravity="center"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabRippleColor="@android:color/transparent"
+                    android:background="@android:color/transparent"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+<!--            "New" tag-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp">
+                <TextView
+                    android:id="@+id/newTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text = "New"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="6dp"
+                    android:paddingStart="16dp"
+                    android:background="@drawable/new_square_background"/>
+            </LinearLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@android:color/white">
+                <LinearLayout
+                    android:id="@+id/bussinessInfo"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/categoryLabel"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:text="Category"
+                    android:textColor="#896978"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:id="@+id/category"
                     android:layout_height = "wrap_content"
                     android:layout_width = "wrap_content"
-                    android:textSize = "16sp"
-                    android:textColor = "@color/black"
-                    android:text = "Category: Student Nail Art and Manicures"
-                    android:layout_marginBottom="5dp"/>
+                    android:text="Nails"
+                    android:textColor="#1A181B"
+                    android:textSize="12sp"/>
+
 
                 <TextView
-                    android:id="@+id/location"
-                    android:layout_height = "wrap_content"
-                    android:layout_width = "wrap_content"
-                    android:textSize = "16sp"
-                    android:textColor = "@color/black"
-                    android:text = "Location: 309 E Green St, Urbana, IL"
-                    android:layout_marginBottom="5dp"/>
-
-                <TextView
-                    android:id="@+id/ci"
-                    android:layout_height = "wrap_content"
-                    android:layout_width = "wrap_content"
-                    android:textSize = "16sp"
-                    android:textColor = "@color/black"
-                    android:text = "Contact Info: @nailedit.lily (Instagram) | (217) 555-9412L"
-                    android:layout_marginBottom="5dp"/>
-
-                <TextView
-                    android:id="@+id/owned_by"
-                    android:layout_height = "wrap_content"
-                    android:layout_width = "wrap_content"
-                    android:textSize = "16sp"
-                    android:textColor = "@color/black"
-                    android:text = "Owned By: Lily Chen, Sophomore, Graphic Design major"
-                    android:layout_marginBottom="5dp"/>
-
-                <TextView
-                    android:id="@+id/price_range"
-                    android:layout_height = "wrap_content"
-                    android:layout_width = "wrap_content"
-                    android:textSize = "16sp"
-                    android:textColor = "@color/black"
-                    android:text = "Price Range: $20–45 (basic polish → full gel set)"
-                    android:layout_marginBottom="5dp"/>
+                    android:id="@+id/aboutLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="About"
+                    android:textColor="#896978"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/description"
                     android:layout_height = "wrap_content"
                     android:layout_width = "wrap_content"
-                    android:textSize = "16sp"
-                    android:textColor = "@color/black"
+                    android:textSize = "12sp"
+                    android:textColor = "#1A181B"
                     android:text = "Description: Offering creative nail designs and custom gel art. Appointments open evenings and weekends. 10% off for UIUC students!"
                     android:layout_marginBottom="5dp"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical">
+
+<!--                    <TextView-->
+<!--                        android:layout_height = "wrap_content"-->
+<!--                        android:layout_width = "wrap_content"-->
+<!--                        android:textSize = "20sp"-->
+<!--                        android:textColor = "#896978"-->
+<!--                        android:text = "$"-->
+<!--                        android:layout_marginEnd="8dp"/>-->
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/priceLabel"
+                            android:layout_height = "wrap_content"
+                            android:layout_width = "wrap_content"
+                            android:textSize = "16sp"
+                            android:textColor = "#896978"
+                            android:text = "Price Range"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/price_range"
+                            android:layout_height = "wrap_content"
+                            android:layout_width = "wrap_content"
+                            android:textSize = "12sp"
+                            android:textColor = "#1A181B"
+                            android:text = "$7 - 12"
+                            android:layout_marginTop="2dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/locationLabel"
+                        android:layout_height = "wrap_content"
+                        android:layout_width = "wrap_content"
+                        android:textSize = "16sp"
+                        android:textColor = "#896978"
+                        android:text = "Location"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_height = "wrap_content"
+                        android:layout_width = "wrap_content"
+                        android:textSize = "12sp"
+                        android:textColor = "#1A181B"
+                        android:text = "Location: 309 E Green St, Urbana, IL"
+                        android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/contactLabel"
+                        android:layout_height = "wrap_content"
+                        android:layout_width = "wrap_content"
+                        android:textSize = "16sp"
+                        android:textColor = "#896978"
+                        android:text = "Contact"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ci"
+                        android:layout_height = "wrap_content"
+                        android:layout_width = "wrap_content"
+                        android:textSize = "12sp"
+                        android:textColor = "#1A181B"
+                        android:text = "Handle: @nailedit.lily (Instagram) | (217) 555-9412L"
+                        android:layout_marginBottom="5dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#E4DDEB" />
+
                 <TextView
-                    android:id="@+id/contact_info"
+                    android:id="@+id/ownedlabel"
                     android:layout_height = "wrap_content"
                     android:layout_width = "wrap_content"
                     android:textSize = "16sp"
-                    android:textColor = "@color/black"
-                    android:text = "Contact Information: "
-                    android:layout_marginBottom="5dp"/>
+                    android:textColor = "#896978"
+                    android:text = "Owned By"
+                    android:layout_marginTop="4dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/owned_by"
+                    android:layout_height = "wrap_content"
+                    android:layout_width = "wrap_content"
+                    android:textSize = "12sp"
+                    android:textColor = "#1A181B"
+                    android:text = "Lily Chen, Sophomore, Graphic Design major"
+                    android:layout_marginTop="4dp"/>
+
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/contact_info"-->
+<!--                    android:layout_height = "wrap_content"-->
+<!--                    android:layout_width = "wrap_content"-->
+<!--                    android:visibility="gone"/>-->
 
                 <TextView
                     android:id="@+id/website_url"
                     android:layout_height = "wrap_content"
                     android:layout_width = "wrap_content"
-                    android:textSize = "16sp"
-                    android:textColor = "@color/black"
-                    android:text = "Website URL: "
-                    android:layout_marginBottom="5dp"/>
-
-            </LinearLayout>
+                   android:visibility="gone"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
+
     </ScrollView>
 <!--NavBar-->
     <!-- Bottom Navigation Bar -->
@@ -184,7 +366,7 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="@android:color/white"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"

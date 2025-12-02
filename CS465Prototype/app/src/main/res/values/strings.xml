@@ -3,13 +3,24 @@
 
 
     <!-- For drop down bar in filter page-->
-    <string-array name="service_options">
+    <string-array name="tags_array">
+        <item>Any</item>
         <item>nails</item>
-        <item>florist</item>
-        <item>jewelry</item>
-        <item>tutoring</item>
-        <item>sewing/hemming</item>
-        <item>crafts</item>
+        <item>nailart</item>
+        <item>art</item>
+        <item>cosmetics</item>
+        <item>haircut</item>
+        <item>barber</item>
+        <item>grooming</item>
+        <item>menscare</item>
+        <item>charms</item>
+        <item>commissions</item>
+        <item>handmade</item>
+        <item>food</item>
+        <item>meals</item>
+        <item>flowers</item>
+        <item>gifts</item>
+        <item>bouquets</item>
+        <item>handcrafted</item>
     </string-array>
-
 </resources>

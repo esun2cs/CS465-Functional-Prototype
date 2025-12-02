@@ -45,4 +45,5 @@ public class BusinessImagePagerAdapter
             imageView = itemView.findViewById(R.id.businessImage);
         }
     }
+
 }

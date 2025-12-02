@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class filterActivity extends AppCompatActivity {
+
+    private Spinner spinner;
+    private CheckBox onCampus, offCampus;
+    private SeekBar seekbarPrice;
+    private TextView labelPrice;
+    private Button btnApply, btnClear;
+    private ImageButton btnClose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,50 +40,87 @@ public class filterActivity extends AppCompatActivity {
             return insets;
         });
 
-        // ============================
-        // SPINNER SETUP (FIXED)
-        // ============================
-        Spinner spinner = findViewById(R.id.spinner_service);
+        // Find views
+        spinner = findViewById(R.id.spinner_service);
+        onCampus = findViewById(R.id.checkbox_on_campus);
+        offCampus = findViewById(R.id.checkbox_off_campus);
+        seekbarPrice = findViewById(R.id.seekbar_price);
+        labelPrice = findViewById(R.id.label_price_value);
+        btnApply = findViewById(R.id.btn_apply_filters);
+        btnClear = findViewById(R.id.btn_clear_filters);
+        btnClose = findViewById(R.id.btn_close_popup);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+        // Tag spinner set up
+        ArrayAdapter<CharSequence> tagAdapter = ArrayAdapter.createFromResource(
                 this,
-                R.array.service_options,                  // ← Now using strings.xml
+                R.array.tags_array,
                 android.R.layout.simple_spinner_item
         );
+        tagAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(tagAdapter);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
 
-        // Close button → go back to searchActivity
-        ImageButton closeButton = findViewById(R.id.btn_close_popup);
-        closeButton.setOnClickListener(v -> {
-            startActivity(new Intent(filterActivity.this, searchActivity.class));
-            finish();
+        // price icon slider
+        seekbarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int value, boolean fromUser) {
+                labelPrice.setText("$" + value);
+
+                // Move label to follow thumb position
+                float x = seekBar.getX()
+                        + seekBar.getThumb().getBounds().centerX()
+                        - (labelPrice.getWidth() / 2f);
+
+                labelPrice.setX(x);
+            }
+
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-        // Clear button resets all filters
-        Button clearButton = findViewById(R.id.btn_clear_filters);
-        clearButton.setOnClickListener(v -> {
-            spinner.setSelection(0);
+        // Set initial label position (price starts at 0)
+        labelPrice.setText("$" + seekbarPrice.getProgress());
 
-            CheckBox onCampus = findViewById(R.id.checkbox_on_campus);
-            CheckBox offCampus = findViewById(R.id.checkbox_off_campus);
-            SeekBar seek = findViewById(R.id.seekbar_price);
+       //close button
+        btnClose.setOnClickListener(v -> finish());
 
+        // ============================
+        // CLEAR FILTERS
+        // ============================
+        btnClear.setOnClickListener(v -> {
+            spinner.setSelection(0); // "Any"
             onCampus.setChecked(false);
             offCampus.setChecked(false);
-            seek.setProgress(0);
+            seekbarPrice.setProgress(100);
+            labelPrice.setText("$100");
         });
 
-        // Apply Filters → go to Search page
-        Button applyButton = findViewById(R.id.btn_apply_filters);
-        applyButton.setOnClickListener(v -> {
-            Intent intent = new Intent(filterActivity.this, searchActivity.class);
-            startActivity(intent);
+        //apply filters
+        btnApply.setOnClickListener(v -> {
+
+            // Tag filter
+            String tag = spinner.getSelectedItem().toString().toLowerCase();
+            if (tag.equals("any")) tag = "any";
+
+            // Location filter
+            String location = "any";
+            if (onCampus.isChecked()) location = "on";
+            if (offCampus.isChecked()) location = "off";
+
+            // Price filter
+            int maxPrice = seekbarPrice.getProgress();
+
+            // Send filters back
+            Intent result = new Intent();
+            result.putExtra("tagFilter", tag);
+            result.putExtra("locationFilter", location);
+            result.putExtra("maxPrice", maxPrice);
+
+            setResult(RESULT_OK, result);
             finish();
         });
 
-        // Bottom navigation
+        //bottom navigation
         BottomNavigationView nav = findViewById(R.id.bottom_navigation);
         nav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();

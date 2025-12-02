@@ -18,6 +18,7 @@ public class Business {
     public boolean favorited;
     public boolean isNew;
     public ArrayList<String> tags;
+    public boolean isOnCampus;
 
     public Business(JSONObject obj) {
         id = obj.optString("id");
@@ -31,6 +32,8 @@ public class Business {
         photo = obj.optString("photo");
         favorited = obj.optString("favorited").equals("true");
         isNew = obj.optString("new").equals("true");
+
+        isOnCampus = obj.optBoolean("is_on_campus", false);
 
         tags = new ArrayList<>();
         JSONArray tagArray = obj.optJSONArray("tags");

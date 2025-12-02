@@ -31,96 +31,19 @@ public class discoverActivity extends AppCompatActivity {
             return insets;
         });
 
-        LinearLayout cardContainer = findViewById(R.id.card_container);
+        // Data loading should happen once in onCreate.
         BusinessDataManager dm = BusinessDataManager.getInstance();
-        // Ensure data is loaded
         if (dm.allBusinesses.isEmpty()) {
             dm.loadFromJson(this);
         }
 
-
-        LayoutInflater inflater = LayoutInflater.from(this);
-
-        for (Business b : dm.allBusinesses) {
-            if (b.isNew) {
-
-                // Inflate card
-                View card = inflater.inflate(R.layout.business_card, cardContainer, false);
-
-                // Set name
-                TextView name = card.findViewById(R.id.business_name);
-                name.setText(b.name);
-
-                // Example: "Added 12 days ago"
-                TextView added = card.findViewById(R.id.business_added);
-                added.setText("Added recently");
-
-                // Set category
-                TextView category = card.findViewById(R.id.business_category);
-                category.setText(b.category);
-
-                // Set description
-                TextView desc = card.findViewById(R.id.business_description);
-                desc.setText(b.description);
-
-                // Set image (handles PNG/JPG + normalizes the name)
-                ImageView img = card.findViewById(R.id.business_photo);
-
-                String imageName = b.photo
-                        .toLowerCase()
-                        .replace(".jpg", "")
-                        .replace(".jpeg", "")
-                        .replace(".png", "")
-                        .replace("-", "_")
-                        .replace(" ", "_");
-
-                int imgRes = getResources().getIdentifier(imageName, "drawable", getPackageName());
-
-                if (imgRes != 0) {
-                    img.setImageResource(imgRes);
-                } else {
-                    img.setImageResource(R.drawable.ic_launcher_background); // TEMP FALLBACK
-                }
-
-                // Add click handler
-                card.setOnClickListener(v -> {
-                    Intent i = new Intent(this, BusinessProfileActivity.class);
-                    i.putExtra("business_id", b.id);
-                    startActivity(i);
-                });
-                
-                // Star Icon Logic
-                ImageView star = card.findViewById(R.id.business_favorite_star);
-                // Set initial star state
-                if (b.favorited) {
-                    star.setImageResource(android.R.drawable.btn_star_big_on);
-                } else {
-                    star.setImageResource(android.R.drawable.btn_star_big_off);
-                }
-                // Add click listener to the star to toggle the favorite state
-                star.setOnClickListener(v -> {
-                    b.favorited = !b.favorited; // Toggle state
-                    // Update icon immediately
-                    if (b.favorited) {
-                        star.setImageResource(android.R.drawable.btn_star_big_on);
-                    } else {
-                        star.setImageResource(android.R.drawable.btn_star_big_off);
-                    }
-                });
-
-                // Add card to container
-                cardContainer.addView(card);
-            }
-        }
-
+        // Navigation setup should also happen once in onCreate.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            //        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
-                    // do something
                     Intent i = new Intent(discoverActivity.this, MainActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(i);
@@ -140,32 +63,91 @@ public class discoverActivity extends AppCompatActivity {
         });
     }
 
-    public void launchSearch(View v) {
-        // launch Search page
+    /**
+     * By moving the card-building logic to onResume, the UI will be refreshed
+     * every time the activity comes back into view. This fixes the bug where
+     * the star status wasn't updated when returning from the profile page.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        // Instantiate a new object of type intent, assigned to variable i
+        LinearLayout cardContainer = findViewById(R.id.card_container);
+        // Clear old cards to prevent duplicates before re-populating.
+        cardContainer.removeAllViews();
+
+        BusinessDataManager dm = BusinessDataManager.getInstance();
+        LayoutInflater inflater = LayoutInflater.from(this);
+
+        for (Business b : dm.allBusinesses) {
+            if (b.isNew) {
+
+                View card = inflater.inflate(R.layout.business_card, cardContainer, false);
+
+                ((TextView) card.findViewById(R.id.business_name)).setText(b.name);
+                ((TextView) card.findViewById(R.id.business_added)).setText("Added recently");
+                ((TextView) card.findViewById(R.id.business_category)).setText(b.category);
+                ((TextView) card.findViewById(R.id.business_description)).setText(b.description);
+
+                ImageView img = card.findViewById(R.id.business_photo);
+                String imageName = b.photo.toLowerCase()
+                        .replace(".jpg", "")
+                        .replace(".jpeg", "")
+                        .replace(".png", "")
+                        .replace("-", "_")
+                        .replace(" ", "_");
+
+                int imgRes = getResources().getIdentifier(imageName, "drawable", getPackageName());
+                if (imgRes != 0) {
+                    img.setImageResource(imgRes);
+                } else {
+                    img.setImageResource(R.drawable.ic_launcher_background);
+                }
+
+                card.setOnClickListener(v -> {
+                    Intent i = new Intent(this, BusinessProfileActivity.class);
+                    i.putExtra("business_id", b.id);
+                    startActivity(i);
+                });
+
+                // Star Icon Logic
+                ImageView star = card.findViewById(R.id.business_favorite_star);
+                if (b.favorited) {
+                    star.setImageResource(android.R.drawable.btn_star_big_on);
+                } else {
+                    star.setImageResource(android.R.drawable.btn_star_big_off);
+                }
+
+                star.setOnClickListener(v -> {
+                    b.favorited = !b.favorited;
+                    if (b.favorited) {
+                        star.setImageResource(android.R.drawable.btn_star_big_on);
+                    } else {
+                        star.setImageResource(android.R.drawable.btn_star_big_off);
+                    }
+                });
+
+                cardContainer.addView(card);
+            }
+        }
+    }
+
+    public void launchSearch(View v) {
         Intent i = new Intent(this, searchActivity.class);
         startActivity(i);
     }
 
     public void launchDiscover(View v) {
-        // launch Search page
-
-        // Instantiate a new object of type intent, assigned to variable i
         Intent i = new Intent(this, discoverActivity.class);
         startActivity(i);
     }
 
     public void launchFavorites(View v) {
-        // launch Search page
-
-        // Instantiate a new object of type intent, assigned to variable i
         Intent i = new Intent(this, favoritesActivity.class);
         startActivity(i);
     }
 
     public void launchBusinessProfile(View v) {
-        // launch business page
         Intent i = new Intent(this, BusinessProfileActivity.class);
         startActivity(i);
     }

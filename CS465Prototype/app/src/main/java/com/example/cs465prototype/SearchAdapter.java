@@ -78,6 +78,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return businesses.size();
     }
 
+    // Optional: called from filterActivity result – right now just refreshes
     public void applyFilters(String location, int maxPrice, String tag) {
         // If you later want advanced filters, you can filter `businesses` here.
         notifyDataSetChanged();

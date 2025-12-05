@@ -33,7 +33,7 @@
         android:textColor = "@color/white"
         android:text = "Back"
         android:background="@drawable/back_button"
-        app:backgroundTint="@null"
+        app:backgroundTint="#2F4858"
         android:padding="0dp"
        />
 
@@ -41,14 +41,14 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_weight="1"/>
-    <TextView
-        android:id="@+id/appName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#2F4858"
-        android:textStyle="bold"
-        android:text="UIUC Businesses" />
+<!--    <TextView-->
+<!--        android:id="@+id/appName"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textColor="#2F4858"-->
+<!--        android:textStyle="bold"-->
+<!--        android:text="UIUC Businesses" />-->
     </LinearLayout>
 
 
@@ -149,6 +149,7 @@
                     android:layout_height="wrap_content"
                     android:text = "New"
                     android:textColor="@color/white"
+                    android:backgroundTint="#2F4858"
                     android:textStyle="bold"
                     android:textSize="14sp"
                     android:paddingTop="6dp"

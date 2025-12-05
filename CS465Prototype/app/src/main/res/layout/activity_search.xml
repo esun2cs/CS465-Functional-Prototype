@@ -72,11 +72,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"/>
 
+    <!-- Empty State View -->
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No matching results"
+        android:textSize="14sp"
+        android:textColor="#7A8A99"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/search_results_recycler"
+        app:layout_constraintBottom_toBottomOf="@id/search_results_recycler"
+        app:layout_constraintStart_toStartOf="@id/search_results_recycler"
+        app:layout_constraintEnd_toEndOf="@id/search_results_recycler" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/white"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -39,6 +39,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         // Text
         holder.name.setText(b.name);
 //        holder.added.setText("Matches search");
+        holder.price.setText(b.price_range);
         holder.category.setText(b.category);
         holder.description.setText(b.description);
 
@@ -100,7 +101,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, added, category, description, newBadge;
+        TextView name, added, category, description, newBadge, price;
         ImageView photo;
         ImageView star;   // NOTE: uses the star in business_card.xml, keeps it consistent with discover and favorites pages
 
@@ -113,6 +114,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             photo = itemView.findViewById(R.id.business_photo);
             star = itemView.findViewById(R.id.business_favorite_star);
             newBadge = itemView.findViewById(R.id.business_new_badge);
+            price = itemView.findViewById(R.id.business_price);
         }
     }
 }

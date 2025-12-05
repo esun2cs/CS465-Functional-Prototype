@@ -36,7 +36,7 @@ public class filterActivity extends AppCompatActivity {
         // Edge-to-edge padding
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+            v.setPadding(bars.left, bars.top, bars.right, 0); // systemBars.bottom nav bar gap fix
             return insets;
         });
 

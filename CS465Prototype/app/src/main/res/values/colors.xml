@@ -4,4 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#6C55A3</color>
 
+    <color name="home_primary_dark">#223548</color>
+    <color name="home_button_bg">#243B53</color>
+    <color name="home_button_text">#FFFFFFFF</color>
+
 </resources>

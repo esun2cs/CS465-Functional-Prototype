@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,66 +8,114 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+<!--    bg image-->
+    <ImageView
+        android:id="@+id/home_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/home_bg"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+<!--    Email view from figma -->
+<!--    <TextView-->
+<!--        android:id="@+id/userEmail"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="jtandbem@illinois.edu"-->
+<!--        android:textSize="12sp"-->
+<!--        android:textColor="@color/home_primary_dark"-->
+<!--        android:padding="8dp"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintMarginEnd="16dp"-->
+<!--        app:layout_constraintMarginTop="16dp" />-->
+
+    <!-- 2) Welcome text -->
     <TextView
         android:id="@+id/welcomeTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
-        android:text="Welcome to\nUIUC Student Businesses"
-        android:textAlignment="center"
-        android:textSize="40sp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginTop="120dp"
+        android:text="Welcome to UIUC\nStudent Businesses!"
+        android:textAlignment="viewStart"
+        android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.562"
+        android:textColor="@color/home_primary_dark"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- 3) Main action buttons -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/homeButtons"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTitle">
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/welcomeTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation">
 
         <!-- Discover -->
         <Button
             android:id="@+id/buttonDiscover"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/purple"
+            android:layout_height="52dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/home_primary_button"
+            android:text="Discover"
+            android:textSize="18sp"
+            android:textColor="@color/home_button_text"
             android:fontFamily="sans-serif-medium"
-            android:onClick="launchDiscover"
-            android:text="Discover New"
-            android:textSize="24sp"
-            android:drawableRight="@drawable/baseline_lightbulb_24"/>
+            android:drawableLeft="@drawable/baseline_lightbulb_24"
+            android:drawablePadding="8dp"
+            app:backgroundTint="#2F4858"
+            android:onClick="launchDiscover" />
 
         <!-- Search -->
         <Button
             android:id="@+id/buttonSearch"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/purple"
-            android:fontFamily="sans-serif-medium"
-            android:onClick="launchSearch"
+            android:layout_height="52dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/home_primary_button"
             android:text="Search"
-            android:textSize="24sp"
-            android:drawableRight="@drawable/outline_document_search_24" />
-
+            android:textSize="18sp"
+            android:textColor="@color/home_button_text"
+            android:fontFamily="sans-serif-medium"
+            android:drawableLeft="@drawable/outline_document_search_24"
+            android:drawablePadding="8dp"
+            app:backgroundTint="#2F4858"
+            android:onClick="launchSearch" />
 
         <!-- Favorites -->
         <Button
             android:id="@+id/buttonFavorites"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/purple"
-            android:fontFamily="sans-serif-medium"
-            android:onClick="launchFavorites"
+            android:layout_height="52dp"
+            android:background="@drawable/home_primary_button"
             android:text="Favorited"
-            android:textSize="24sp"
-            android:drawableRight="@drawable/outline_family_star_24"/>
+            android:textSize="18sp"
+            android:textColor="@color/home_button_text"
+            android:fontFamily="sans-serif-medium"
+            android:drawableLeft="@drawable/outline_family_star_24"
+            android:drawablePadding="8dp"
+            app:backgroundTint="#2F4858"
+            android:onClick="launchFavorites" />
 
     </LinearLayout>
+
     <!-- Bottom Navigation Bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -77,6 +126,6 @@
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

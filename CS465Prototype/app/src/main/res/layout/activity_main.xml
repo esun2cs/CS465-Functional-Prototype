@@ -20,20 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-<!--    Email view from figma -->
-<!--    <TextView-->
-<!--        android:id="@+id/userEmail"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="jtandbem@illinois.edu"-->
-<!--        android:textSize="12sp"-->
-<!--        android:textColor="@color/home_primary_dark"-->
-<!--        android:padding="8dp"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintMarginEnd="16dp"-->
-<!--        app:layout_constraintMarginTop="16dp" />-->
-
     <!-- 2) Welcome text -->
     <TextView
         android:id="@+id/welcomeTitle"
@@ -44,7 +30,7 @@
         android:layout_marginTop="120dp"
         android:text="Welcome to UIUC\nStudent Businesses!"
         android:textAlignment="viewStart"
-        android:textSize="32sp"
+        android:textSize="37sp"
         android:textStyle="bold"
         android:textColor="@color/home_primary_dark"
         app:layout_constraintTop_toTopOf="parent"

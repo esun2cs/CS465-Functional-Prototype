@@ -38,7 +38,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
         // Text
         holder.name.setText(b.name);
-        holder.added.setText("Matches search");
+//        holder.added.setText("Matches search");
         holder.category.setText(b.category);
         holder.description.setText(b.description);
 
@@ -65,6 +65,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             b.favorited = !b.favorited;
             updateStarIcon(holder.star, b.favorited);
         });
+
+        // new badge visibility
+        if (b.isNew) {
+            holder.newBadge.setVisibility(View.VISIBLE);
+        } else {
+            holder.newBadge.setVisibility(View.GONE);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             Intent i = new Intent(context, BusinessProfileActivity.class);
@@ -93,7 +100,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, added, category, description;
+        TextView name, added, category, description, newBadge;
         ImageView photo;
         ImageView star;   // NOTE: uses the star in business_card.xml, keeps it consistent with discover and favorites pages
 
@@ -105,6 +112,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             description = itemView.findViewById(R.id.business_description);
             photo = itemView.findViewById(R.id.business_photo);
             star = itemView.findViewById(R.id.business_favorite_star);
+            newBadge = itemView.findViewById(R.id.business_new_badge);
         }
     }
 }

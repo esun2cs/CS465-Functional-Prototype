@@ -89,6 +89,10 @@ public class discoverActivity extends AppCompatActivity {
                 ((TextView) card.findViewById(R.id.business_category)).setText(b.category);
                 ((TextView) card.findViewById(R.id.business_description)).setText(b.description);
 
+                // display new badge visibility status
+                TextView newBadge = card.findViewById(R.id.business_new_badge);
+                newBadge.setVisibility(b.isNew ? View.VISIBLE : View.GONE);
+
                 ImageView img = card.findViewById(R.id.business_photo);
                 String imageName = b.photo.toLowerCase()
                         .replace(".jpg", "")

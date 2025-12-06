@@ -94,18 +94,18 @@ public class searchActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(this::handleNavigation);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (adapter != null && searchView != null) {
-            // Re-apply current search text so filteredBusinesses is rebuilt
-            String q = searchView.getQuery() != null
-                    ? searchView.getQuery().toString()
-                    : "";
-            filter(q);   // this already calls adapter.notifyDataSetChanged()
-        }
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        if (adapter != null && searchView != null) {
+//            // Re-apply current search text so filteredBusinesses is rebuilt
+//            String q = searchView.getQuery() != null
+//                    ? searchView.getQuery().toString()
+//                    : "";
+//            filter(q);   // this already calls adapter.notifyDataSetChanged()
+//        }
+//    }
 
 
     private boolean handleNavigation(@NonNull MenuItem item) {

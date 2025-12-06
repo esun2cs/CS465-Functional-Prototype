@@ -50,6 +50,18 @@ public class filterActivity extends AppCompatActivity {
         btnClear = findViewById(R.id.btn_clear_filters);
         btnClose = findViewById(R.id.btn_close_popup);
 
+        // Set initial slider value to middle ($50)
+        seekbarPrice.post(() -> {
+            seekbarPrice.setProgress(50);
+            labelPrice.setText("$50");
+
+            // Move the label to the correct X position
+            float x = seekbarPrice.getX()
+                    + seekbarPrice.getThumb().getBounds().centerX()
+                    - (labelPrice.getWidth() / 2f);
+            labelPrice.setX(x);
+        });
+
         // Tag spinner set up
         ArrayAdapter<CharSequence> tagAdapter = ArrayAdapter.createFromResource(
                 this,

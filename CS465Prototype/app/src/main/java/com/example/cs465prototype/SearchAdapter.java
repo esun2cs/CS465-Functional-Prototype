@@ -16,12 +16,13 @@ import java.util.ArrayList;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
     private final Context context;
-    // already filtered list passed in from searchActivity
     private final ArrayList<Business> businesses;
+    private ArrayList<Business> fullList;
 
     public SearchAdapter(Context context, ArrayList<Business> businesses) {
         this.context = context;
         this.businesses = businesses;
+        this.fullList = new ArrayList<>(businesses);
     }
 
     @NonNull
@@ -86,11 +87,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return businesses.size();
     }
 
-    // Optional: called from filterActivity result – right now just refreshes
-    public void applyFilters(String location, int maxPrice, String tag) {
-        // If you later want advanced filters, you can filter `businesses` here.
-        notifyDataSetChanged();
-    }
+//    // Optional: called from filterActivity result – right now just refreshes
+//    public void applyFilters(String location, int maxPrice, String tag) {
+//        // If you later want advanced filters, you can filter `businesses` here.
+//        notifyDataSetChanged();
+//    }
 
     private void updateStarIcon(ImageView starView, boolean isFav) {
         if (isFav) {
@@ -98,6 +99,72 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         } else {
             starView.setImageResource(android.R.drawable.btn_star_big_off);
         }
+    }
+
+    public void applyFilters(String locationFilter, int maxPrice, String tagFilter) {
+
+        ArrayList<Business> filtered = new ArrayList<>();
+
+        for (Business b : fullList) {
+
+            boolean matchesLocation = true;
+            boolean matchesPrice = true;
+            boolean matchesTag = true;
+
+            //filtering location
+            if (!locationFilter.equals("any")) {
+                boolean isOnCampus = b.location.toLowerCase().contains("campus");
+                if (locationFilter.equals("on") && !isOnCampus) matchesLocation = false;
+                if (locationFilter.equals("off") && isOnCampus) matchesLocation = false;
+            }
+
+            //filtering price
+            try {
+                // Clean string
+                String clean = b.price_range
+                        .replace("$", "")
+                        .replace(" ", "")
+                        .replace("–", "-")
+                        .toLowerCase()
+                        .replace("peritem", "");
+
+                clean = clean.replaceAll("[^0-9\\-]", "");
+
+                String[] parts = clean.split("-");
+
+                if (parts.length == 2) {
+                    int low = Integer.parseInt(parts[0]);     // lowest price
+                    int high = Integer.parseInt(parts[1]);    // highest price
+
+                    // The key change:
+                    if (low > maxPrice) {
+                        matchesPrice = false;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //tag filtering
+            if (!tagFilter.equals("any")) {
+                boolean found = false;
+                for (String t : b.tags) {
+                    if (t.equalsIgnoreCase(tagFilter)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) matchesTag = false;
+            }
+
+            if (matchesLocation && matchesPrice && matchesTag) {
+                filtered.add(b);
+            }
+        }
+
+        businesses.clear();
+        businesses.addAll(filtered);
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
